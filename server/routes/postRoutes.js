@@ -8,6 +8,11 @@ dotenv.config();
 
 const router= express.Router();
 
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
+});
 
 router.route('./').get(async (req, res) => {
     try {
@@ -33,6 +38,6 @@ router.route('./').get(async (req, res) => {
         res.status(500).json({success: false, message: 'Unable to create a post, please try again'});
     }
  })
- 
+
 export default router;
 
