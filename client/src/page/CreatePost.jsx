@@ -28,7 +28,7 @@ const CreatePost = () => {
     if (form.prompt) {
       try {
         setGeneratingImg(true);
-        const response = await fetch('http://localhost:8080/api/v1/gemini', {
+        const response = await fetch('http://localhost:8080/api/v1/fal', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -39,7 +39,7 @@ const CreatePost = () => {
         });
 
         const data = await response.json();
-        setForm({ ...form, photo: `data:image/jpeg;base64,${data.photo}` });
+        setForm({ ...form, photo: data.photo });
       } catch (err) {
         alert(err);
       } finally {

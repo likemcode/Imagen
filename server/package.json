@@ -11,6 +11,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@fal-ai/serverless-client": "^0.14.2",
     "@google/generative-ai": "^0.17.1",
     "cloudinary": "^2.4.0",
     "cors": "^2.8.5",
