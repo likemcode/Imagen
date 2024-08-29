@@ -2,9 +2,6 @@ import express from 'express';
 import * as dotenv from 'dotenv';
 import * as fal from "@fal-ai/serverless-client";
 
-
-import Post from '../mongodb/models/post.js'
-
 dotenv.config();
 
 const router= express.Router();
@@ -16,7 +13,6 @@ fal.config({
 router.route('/').get((req, res) => {
     res.status(200).json({ message: 'gemini is good to go!' });
 });
-
 router.route('/').post(async (req, res) => {
     try {
         const  {prompt} = req.body;
@@ -37,7 +33,6 @@ router.route('/').post(async (req, res) => {
           const imageUrl = result.images[0].url;
         res.status(200).json({ photo:imageUrl});
     } catch (error) {
-        console.log(error)
         res.status(500).send(error?.body?.detail  || 'Something went wrong');
     }
 
