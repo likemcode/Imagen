@@ -16,6 +16,7 @@ const CreatePost = () => {
 
   const [generatingImg, setGeneratingImg] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [waitingForImage, setWaitingForImage] = useState(false);
 
   const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
 
@@ -28,7 +29,8 @@ const CreatePost = () => {
     if (form.prompt) {
       try {
         setGeneratingImg(true);
-        const response = await fetch('http://localhost:8080/api/v1/fal', {
+        setWaitingForImage(false);
+        const response = await fetch('https://imagen-5bai.onrender.com/api/v1/fal', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -40,6 +42,7 @@ const CreatePost = () => {
 
         const data = await response.json();
         setForm({ ...form, photo: data.photo });
+        setWaitingForImage(true);
       } catch (err) {
         alert(err);
       } finally {
@@ -56,7 +59,7 @@ const CreatePost = () => {
     if (form.prompt && form.photo) {
       setLoading(true);
       try {
-        const response = await fetch('http://localhost:8080/api/v1/post', {
+        const response = await fetch('https://imagen-5bai.onrender.com/api/v1/post', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -108,27 +111,33 @@ const CreatePost = () => {
             handleSurpriseMe={handleSurpriseMe}
           />
 
-          <div className="relative bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-64 p-3 h-64 flex justify-center items-center">
-            { form.photo ? (
-              <img
-                src={form.photo}
-                alt={form.prompt}
-                className="w-full h-full object-contain"
-              />
-            ) : (
-              <img
-                src={preview}
-                alt="preview"
-                className="w-9/12 h-9/12 object-contain opacity-40"
-              />
-            )}
+<div className="relative bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-64 p-3 h-64 flex justify-center items-center">
+        {form.photo ? (
+          <img
+            src={form.photo}
+            alt={form.prompt}
+            className="w-full h-full object-contain"
+          />
+        ) : (
+          waitingForImage ? (
+            <div className="text-gray-500 text-center">
+              Wait a second...
+            </div>
+          ) : (
+            <img
+              src={preview}
+              alt="preview"
+              className="w-9/12 h-9/12 object-contain opacity-40"
+            />
+          )
+        )}
 
-            {generatingImg && (
-              <div className="absolute inset-0 z-0 flex justify-center items-center bg-[rgba(0,0,0,0.5)] rounded-lg">
-                <Loader />
-              </div>
-            )}
+        {generatingImg && (
+          <div className="absolute inset-0 z-0 flex justify-center items-center bg-[rgba(0,0,0,0.5)] rounded-lg">
+            <Loader />
           </div>
+        )}
+      </div>
         </div>
 
         <div className="mt-5 flex gap-5">
