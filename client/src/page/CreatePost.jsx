@@ -39,12 +39,13 @@ const CreatePost = () => {
             prompt: form.prompt,
           }),
         });
-
+        console.log(response)
         const data = await response.json();
         setForm({ ...form, photo: data.photo });
         setWaitingForImage(true);
       } catch (err) {
         alert(err);
+        console.log(err)
       } finally {
         setGeneratingImg(false);
       }
@@ -66,14 +67,12 @@ const CreatePost = () => {
           },
           body: JSON.stringify({ ...form }),
         });
-        console.log(response)
 
         await response.json();
         alert('Success');
         navigate('/');
       } catch (err) {
         alert(err);
-        console.log(err)
       } finally {
         setLoading(false);
       }
