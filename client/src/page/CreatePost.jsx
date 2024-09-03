@@ -30,7 +30,7 @@ const CreatePost = () => {
       try {
         setGeneratingImg(true);
         setWaitingForImage(false);
-        const response = await fetch('https://imagen-5bai.onrender.com/api/v1/fal', {
+        const response = await fetch('https://imagen-5bai.onrender.com/api/v1/fal/', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',

@@ -13,7 +13,7 @@ fal.config({
 router.route('/').get((req, res) => {
     res.status(200).json({ message: 'gemini is good to go!' });
 });
-router.route('').post(async (req, res) => {
+router.route('/').post(async (req, res) => {
     try {
         const  {prompt} = req.body;
         const result = await fal.subscribe("fal-ai/stable-diffusion-v3-medium", {
