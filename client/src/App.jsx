@@ -19,6 +19,26 @@ const App = () => (
         <Route path="/create-post" element={<CreatePost />} />
       </Routes>
     </main>
+    <footer className="bg-black text-white py-4 px-6 flex flex-wrap justify-between items-center text-sm">
+      <div className="flex items-center mr-4">
+        
+        <span>© 2024 Imagen. All rights reserved.</span>
+      </div>
+      <div className="flex items-center">
+        <span className="mr-2">Made with 🧠 + ❤️ by</span>
+        <a 
+          href="http://josueavuh.vercel.app" 
+          className="text-blue-400 hover:underline" 
+          target="_blank" 
+          rel="noopener noreferrer"
+        >
+          Jojo
+        </a>
+      </div>
+      <div className="flex items-center">
+        Powered by Stable Diffusion V3
+      </div>
+    </footer>
   </BrowserRouter>
 );
 
