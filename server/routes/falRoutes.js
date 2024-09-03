@@ -31,7 +31,6 @@ router.route('/').post(async (req, res) => {
             // },
           });
           const imageUrl = result.images[0].url;
-        res.setHeader('Content-Type', 'application/json');
         res.status(200).json({ photo:imageUrl});
     } catch (error) {
         res.status(500).send(error?.body?.detail  || 'Something went wrong');
