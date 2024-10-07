@@ -6,6 +6,7 @@ import connectDB from './mongodb/connect.js';
 import postRoutes from './routes/postRoutes.js';
 import falRoutes from './routes/falRoutes.js'
 
+
 dotenv.config();
 
 const app = express();
